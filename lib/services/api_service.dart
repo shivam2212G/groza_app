@@ -71,4 +71,18 @@ class ApiService {
       throw Exception('Failed to load products by category and subcategory');
     }
   }
+
+  static Future<List<Product>> searchProducts(String query) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/products/search?query=$query'),
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      return (jsonData['data'] as List).map((p) => Product.fromJson(p)).toList();
+    } else {
+      throw Exception("Failed to search products");
+    }
+  }
+
 }
