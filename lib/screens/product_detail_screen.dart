@@ -137,7 +137,7 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      product.productDescription,
+                      product.productDescription!,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[700],

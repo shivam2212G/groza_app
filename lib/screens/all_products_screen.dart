@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groza/models/product_model.dart';
 import 'package:groza/screens/product_detail_screen.dart';
-import 'package:groza/screens/search_screen.dart';
 import 'package:groza/screens/user_profile.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';

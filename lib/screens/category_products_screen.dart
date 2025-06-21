@@ -267,11 +267,20 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return _buildProductGridShimmer();
-        } else if (snapshot.hasError) {
+        }
+        else if (snapshot.hasError) {
+          print('Product Error: ${snapshot.error}');
+          print('Product Error: ${snapshot.error}');
+          print('Product Error: ${snapshot.error}');
+          print('Product Error: ${snapshot.error}');
+          print('Product Error: ${snapshot.error}');
+          print('Product Error: ${snapshot.error}');
+          print('Product Error: ${snapshot.error}');
           return SliverFillRemaining(
             child: Center(child: Text('Error loading products')),
           );
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        }
+        else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return SliverFillRemaining(
             child: Center(child: Text('No products available')),
           );

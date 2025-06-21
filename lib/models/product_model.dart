@@ -2,7 +2,7 @@ class Product {
   final int productId;
   final String productName;
   final String productImage;
-  final String productDescription;
+  final String? productDescription;
   final double productPrice;
   final String? categoryName;
   final String? subcategoryName;
