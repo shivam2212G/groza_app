@@ -4,6 +4,7 @@ import 'package:groza/models/product_model.dart';
 import 'package:groza/screens/product_detail_screen.dart';
 import 'package:groza/screens/user_profile.dart';
 import 'package:groza/services/api_service.dart';
+import 'package:groza/services/ip_storage.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -217,6 +218,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildResultsList() {
+    String myip = IpManager.currentIp;
     return ListView.builder(
       padding: EdgeInsets.symmetric(horizontal: 16),
       itemCount: _filtered.length,
@@ -256,7 +258,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: CachedNetworkImage(
-                          imageUrl: 'http://192.168.82.81:8000/storage/${product.productImage}',
+                          imageUrl: 'http://$myip:8000/storage/${product.productImage}',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,

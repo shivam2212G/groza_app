@@ -7,6 +7,7 @@ import 'package:groza/screens/offer_screen.dart';
 import 'package:groza/screens/search_screen.dart';
 import 'package:groza/screens/user_profile.dart';
 import 'package:groza/screens/cart_screen.dart';
+import 'package:groza/services/ip_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../services/api_service.dart';
@@ -67,10 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.person),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
-              );
+              Navigator.pushNamed(context, '/profile');
             },
           ),
         ],
@@ -423,6 +421,7 @@ class HomeContent extends StatelessWidget {
   }
 
   Widget _buildCategoriesSection(BuildContext context) {
+    String myip = IpManager.currentIp;
     final apiService = Provider.of<ApiService>(context, listen: false);
 
     return Column(
@@ -508,7 +507,7 @@ class HomeContent extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: CachedNetworkImage(
-                                imageUrl: 'http://192.168.82.81:8000/storage/${category.categoryImage}',
+                                imageUrl: 'http://$myip:8000/storage/${category.categoryImage}',
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) => Center(
                                   child: CircularProgressIndicator(),
@@ -542,6 +541,7 @@ class HomeContent extends StatelessWidget {
   }
 
   Widget _buildFeaturedProducts(BuildContext context) {
+    String myip = IpManager.currentIp;
     final apiService = Provider.of<ApiService>(context, listen: false);
 
     return FutureBuilder<List<Product>>(
@@ -599,7 +599,7 @@ class HomeContent extends StatelessWidget {
                             borderRadius: BorderRadius.vertical(
                                 top: Radius.circular(12)),
                             child: CachedNetworkImage(
-                              imageUrl: 'http://192.168.82.81:8000/storage/${product.productImage}',
+                              imageUrl: 'http://$myip:8000/storage/${product.productImage}',
                               height: 110,
                               width: double.infinity,
                               fit: BoxFit.cover,

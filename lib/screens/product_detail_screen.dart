@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:groza/models/product_model.dart';
+import 'package:groza/services/ip_storage.dart';
 
 class ProductDetailScreen extends StatelessWidget {
+  String myip = IpManager.currentIp;
   final Product product;
 
   ProductDetailScreen({required this.product});
@@ -49,7 +51,7 @@ class ProductDetailScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    'http://192.168.82.81:8000/storage/${product.productImage}',
+                    'http://$myip:8000/storage/${product.productImage}',
                   ),
                   fit: BoxFit.cover,
                 ),

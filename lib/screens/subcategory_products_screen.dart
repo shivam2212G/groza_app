@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:groza/models/product_model.dart';
+import 'package:groza/services/ip_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../services/api_service.dart';
@@ -152,6 +153,8 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
   }
 
   Widget _buildProductCard(Product product) {
+    String myip = IpManager.currentIp;
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -181,7 +184,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: 'http://192.168.82.81:8000/storage/${product.productImage}',
+                  imageUrl: 'http://$myip:8000/storage/${product.productImage}',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   placeholder: (context, url) => Shimmer(

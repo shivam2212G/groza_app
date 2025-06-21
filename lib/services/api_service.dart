@@ -2,10 +2,32 @@ import 'dart:convert';
 import 'package:groza/models/category_model.dart';
 import 'package:groza/models/subcategory_model.dart';
 import 'package:groza/models/product_model.dart';
+import 'package:groza/services/ip_storage.dart';
 import 'package:http/http.dart' as http;
 
+
 class ApiService {
-  static const String baseUrl = 'http://192.168.82.81:8000/api/user';
+  static const String myip = IpManager.currentIp;
+  static const String baseUrl = 'http://$myip:8000/api/user';
+  static const auth_baseUrl = 'http://$myip:8000/api';
+
+  Future<http.Response> post(String endpoint, {required Map<String, dynamic> body}) async {
+    return await http.post(
+      Uri.parse('$auth_baseUrl$endpoint'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(body),
+    );
+  }
+
+  Future<http.Response> get(String endpoint, {String? token}) async {
+    return await http.get(
+      Uri.parse('$auth_baseUrl$endpoint'),
+      headers: {
+        'Content-Type': 'application/json',
+        if (token != null) 'Authorization': 'Bearer $token',
+      },
+    );
+  }
 
   Future<List<Category>> getCategories() async {
     final response = await http.get(Uri.parse('$baseUrl/categories'));
@@ -86,3 +108,5 @@ class ApiService {
   }
 
 }
+
+

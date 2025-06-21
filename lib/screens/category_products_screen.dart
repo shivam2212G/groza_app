@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:groza/models/product_model.dart';
 import 'package:groza/models/subcategory_model.dart';
+import 'package:groza/services/ip_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import '../services/api_service.dart';
@@ -12,7 +13,8 @@ class CategoryProductsScreen extends StatefulWidget {
   final int categoryId;
   final String categoryName;
 
-  const CategoryProductsScreen({
+
+  const CategoryProductsScreen(  {
     Key? key,
     required this.categoryId,
     required this.categoryName,
@@ -377,6 +379,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   }
 
   Widget _buildProductCard(Product product) {
+    String myip = IpManager.currentIp;
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -413,7 +416,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                     width: double.infinity,
                     color: Colors.grey[100],
                     child: CachedNetworkImage(
-                      imageUrl: 'http://192.168.82.81:8000/storage/${product.productImage}',
+                      imageUrl: 'http://$myip:8000/storage/${product.productImage}',
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Center(
                         child: CircularProgressIndicator(
